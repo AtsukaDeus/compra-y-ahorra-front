@@ -4,7 +4,7 @@ import NavBar from './components/navbar'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
 import { redirect } from 'next/navigation';
-import AlertMessage from './components/alert';
+
 
 
 
@@ -12,9 +12,14 @@ export default function Home() {
 
   const [token, setToken] = useState('');
   const [userData, setUserData] = useState();
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(localStorage.getItem('token') ? true : false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
 
+  useEffect(() => {
+    if(localStorage.getItem('token')) setIsUserLoggedIn(true);
+  }, [])
+
+  
   useEffect(() => {
     if (!isUserLoggedIn) redirect('/login');
     

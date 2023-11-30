@@ -8,7 +8,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 
 function NavBar() {
 
-    const [isUserLoggedIn, setIsUserLoggedIn] = useState(localStorage.getItem('token') ? true : false);
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
     const loggout = () => {
         localStorage.removeItem('token');
@@ -16,6 +16,10 @@ function NavBar() {
         alert('Se ha cerrado sesión!');
         window.location.replace('/login')
     }
+
+    useEffect(() => {
+        if(localStorage.getItem('token')) setIsUserLoggedIn(true);
+    }, [])
 
 
 return (
